@@ -47,7 +47,7 @@ class PengembangController extends Controller
 
     public function tampilkanPengembangan()
     {
-        $software = Software::all()->where('pengembanganUmum',2)->where('progres_id',1)->where('status_id',2);
+        $software = Software::all()->where('pengembanganUmum',1)->where('progres_id',0)->where('status_id',2);
 
         //BARU
         return view('/pengembang/list-aplikasi',[

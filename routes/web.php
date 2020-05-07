@@ -34,9 +34,10 @@ Route::post('/login/auth','LoginController@authenticate')->name('auth');
 Route::get('/user','UserController@index')->name('instansi');
 Route::get('/user/pengajuan','UserController@tampilkanPengajuan');
 Route::get('/user/pengajuan/{software_id}/detail','UserController@detailPengajuan');
-Route::post('/user/pengajuan/create','UserController@input');
+Route::get('/user/pengajuan/create','UserController@showFormPengajuan')->name('form-create');
+Route::post('/user/pengajuan/create/proses','UserController@input')->name('create');
 Route::get('/user/pengajuan/{id}/ubah','UserController@ubah');
-Route::post('/user/pengajuan/{id}/update','UserController@update');
+Route::post('/user/pengajuan/{id}/update','UserController@prosesUbah');
 
 
 // ADMIN

@@ -53,6 +53,11 @@
                             <div class="validate"></div>
                         </div>
                         <div class="col-md-12 form-group">
+                            <label for="fileSOP">File SOP</label>
+                            <input type="file" class="form-control" name="fileSOP" id="fileSOP" placeholder="Sertakan file dokumentasi aplikasi" value="{{$software->fileSOP}}"/>
+                            <div class="validate"></div>
+                        </div>
+                        <div class="col-md-12 form-group">
                             <label for="deskripsp">Deskripsi</label>
                             <textarea class="form-control" name="deskripsi" id="deskripsi" cols="30" rows="10" placeholder="Jelaskan secara detail apa saja goals dari software ini">{{$software->deskripsi}}</textarea>
                             <div class="validate"></div>
@@ -73,29 +78,69 @@
                             <div class="validate"></div>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label for="jumlah_pemakai_id">Email</label>
+                            <label for="jumlah_pemakai_id">Kisaran jumlah pemakai</label>
                             <select name="jumlah_pemakai_id" class="form-control" id="jumlah_pemakai_id">
-                                <option selected disabled>---Jumlah Pemakai---</option>
+                                <option selected value="{{$software->jumlah_pemakai_id}}">{{$software->jumlah_pemakai->jumlah_pemakai}}</option>
                               @foreach ($jumlah_pemakai as $jp)
                                 <option value="{{$jp->id}}">{{$jp->jumlah_pemakai}}</option>
                               @endforeach
                             </select>
                             <div class="validate"></div>
                         </div>
-                        <div class="col-md-12 form-group">
-                            <label for="name">Subject</label>
-                            <input type="text" class="form-control" name="subject" id="subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                        <div class="col-md-6 form-group">
+                            <label for="basis">Basis aplikasi</label>
+                            <select name="basis" class="form-control" id="basis">
+                                <option selected value="{{$software->basis_id}}">{{$software->basis->basis}}</option>
+                              @foreach ($basis as $b)
+                                <option value="{{$b->id}}">{{$b->basis}}</option>
+                              @endforeach
+                            </select>
                             <div class="validate"></div>
                         </div>
-    
+                        <div class="col-md-6 form-group">
+                            <label for="sistem_operasi">Sistem operasi yang digunakan</label>
+                            <select name="sistem_operasi" class="form-control" id="sistem_operasi">
+                                <option selected value="{{$software->sistem_operasi_id}}">{{$software->sistem_operasi->sistem_operasi}}</option>
+                              @foreach ($sistem_operasi as $so)
+                                <option value="{{$so->id}}">{{$so->sistem_operasi}}</option>
+                              @endforeach
+                            </select>
+                            <div class="validate"></div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="pengguna">Target pengguna aplikasi</label>
+                            <select name="pengguna" class="form-control" id="pengguna">
+                                <option selected value="{{$software->pengguna_id}}">{{$software->pengguna->pengguna_layanan}}</option>
+                              @foreach ($pengguna as $peng)
+                                <option value="{{$peng->id}}">{{$peng->pengguna_layanan}}</option>
+                              @endforeach
+                            </select>
+                            <div class="validate"></div>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="ruang_lingkup">Ruanglingkup Aplikasi</label>
+                            <select name="ruang_lingkup" class="form-control" id="ruang_lingkup">
+                                <option selected value="{{$software->ruang_lingkup_id}}">{{$software->ruang_lingkup->ruang_lingkup}}</option>
+                              @foreach ($ruang_lingkup as $rl)
+                                <option value="{{$rl->id}}">{{$rl->ruang_lingkup}}</option>
+                              @endforeach
+                            </select>
+                            <div class="validate"></div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label for="jenis_database">Jenis database aplikasi</label>
+                            <input type="text" class="form-control" name="jenis_database" id="jenis_database" placeholder="Database yang ingin digunakan" value="{{$software->jenis_database}}"/>
+                            <div class="validate"></div>
+                        </div>
+
                         <div class="col-md-12 mb-3">
-                            <div class="loading">Loading</div>
+                            <div class="loading">Memuat</div>
                             <div class="error-message"></div>
-                            <div class="sent-message">Your message has been sent. Thank you!</div>
+                            <div class="sent-message">Aplikasi telah diubah. Terima kasih!</div>
                         </div>
     
                         <div class="col-md-6 form-group">
-                            <input type="submit" class="btn btn-primary d-block w-100" value="Send Message">
+                            <input type="submit" class="btn btn-primary d-block w-100" value="Ubah">
                         </div>
                   </div>
     

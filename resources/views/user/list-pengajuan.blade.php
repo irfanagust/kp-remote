@@ -37,7 +37,9 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <div class="input-group">
-                            <a href="#" type="button" class="btn btn-primary">Buat pengajuan software</a><br>
+                            <form action="{{route('form-create')}}">
+                                <button type="submit" class="btn btn-primary" onclick="return confirm('Sudahkah mengecek repositori software ?')">Buat pengajuan software</button>
+                            </form>
                         </div>
                         <div class="input-group">
                             <p class="text text-danger">Sebelum anda mengajukan, silahkan cek pada</p><a href="#">Repositori Software</a>

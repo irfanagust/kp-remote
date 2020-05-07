@@ -32,7 +32,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function pengajuan()
+    public function showFormPengajuan()
     {
         $basis = Basis::all();
         $jenis_layanan = Jenis_Layanan::all();
@@ -42,7 +42,7 @@ class UserController extends Controller
         $sistem_operasi = Sistem_Operasi::all();
         
         // INI BUAT ISIAN DROPDOWN
-        return view('user/pengajuan',[
+        return view('user/buat-pengajuan',[
             'basis'=>$basis,
             'jenis_layanan'=>$jenis_layanan,
             'jumlah_pemakai'=>$jumlah_pemakai,
@@ -61,30 +61,29 @@ class UserController extends Controller
 
         // //VALIDASI UNTUK STANDARAISASI ATURAN INPUT PENGAJUAN APLIKASI
         $pesan = [
-            'required' => ':attribute tidak boleh dikosongkan!',
-            'min' => ':attribute minimal :min karakter!',
-            'max' => ':attribute maksimal :max karakter!'
+            'required' => 'tidak boleh dikosongkan!',
+            'min' => 'Field ini minimal :min karakter!',
+            'max' => 'Field ini maksimal :max karakter!'
         ];
         $this->validate($data , [
-            'progres_id',
-            'nama_perangkat_lunak' => 'required',
+            'nama_perangkat_lunak' => 'required|min:6|max:100',
             'fileSOP' => 'required',
-            'fungsi' => 'required',
-            'deskripsi' => 'required',
+            'fungsi' => 'required|min:15|max:100',
+            'deskripsi' => 'required|min:100|max:500',
             'jenis_layanan_id' => 'required',
             'jumlah_pemakai_id' => 'required',
             'basis_id' => 'required',
             'sistem_operasi_id' => 'required',
             'pengguna_id' => 'required',
             'ruang_lingkup_id' => 'required',
-            'jenis_database' => 'required'
+            'jenis_database' => 'required|min:4|max:100'
         ] , $pesan);
         
         Software::create([
             'instansi_id'=>$instansi->id,
-            'status_id'=>$data->status,
-            'progres_id'=>$data->progres_id,
-            'pengembanganUmum'=>$data->pengembanganUmum,
+            'status_id'=>1,
+            'progres_id'=>0,
+            'pengembanganUmum'=>0,
             'pengembang_id'=>0,
             'nama_perangkat_lunak' => $data->nama_perangkat_lunak,
             'fileSOP' => $data->fileSOP,
@@ -99,7 +98,7 @@ class UserController extends Controller
             'jenis_database' => $data->jenis_database
         ]);
 
-        return redirect('/user');
+        return redirect('/user/pengajuan');
 
     }
 
@@ -124,7 +123,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function update(Request $data)
+    public function prosesUbah(Request $data)
     {
 
         $pesan = [
