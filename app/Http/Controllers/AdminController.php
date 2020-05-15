@@ -30,42 +30,56 @@ class AdminController extends Controller
 
     public function index()
     {
-        $user=Auth::user();
-        $software = Software::all();
         $software_blm_disetujui = Software::all()->where('status_id',1);
+        $software_disetujui = Software::all()->where('status_id',2);
         $software_dipertimbangkan = Software::all()->where('status_id',3);
         $software_ditolak = Software::all()->where('status_id',4);
-        return view('admin/index',[
-            'software'=>$software,
+
+        return view('admin/home',[
             'software_blm_disetujui'=>$software_blm_disetujui,
+            'software_disetujui'=>$software_disetujui,
             'software_dipertimbangkan'=>$software_dipertimbangkan,
-            'software_ditolak'=>$software_ditolak,
-            'user'=>$user
-        ]);
-        // dd($software);
-    }
-
-    public function tampilkanPengajuan($status_id)
-    {
-        $user=Auth::user();
-        $decrypted_status_id = decrypt($status_id);
-        $software = Software::all()->where('status_id', $decrypted_status_id)->where('progres_id',1)->where('pengembanganUmum',1);
-
-        return view('/admin/listpengajuan',[
-            'software' => $software,
-            'status_id'=> $decrypted_status_id,
-            'user'=>$user
+            'software_ditolak'=>$software_ditolak
         ]);
     }
 
-    public function ProsesPengajuan(Request $data, $id, $status_id)
+    public function tampilkanPengajuanBerdasarkanStatusId($status_software)
     {
-        $software = Software::find($id);
-        $software->status_id = $status_id;
+        $decrypted_status_software = $status_software; //NANTI DIENCRYPT YA STATUS IDNYA decrypt($status_software);
+        $softwares = Software::all()->where('status_id', $decrypted_status_software)->where('progres_id',0)->where('pengembanganUmum',0);
+
+        $software_blm_disetujui = Software::all()->where('status_id',1);
+        $software_disetujui = Software::all()->where('status_id',2);
+        $software_dipertimbangkan = Software::all()->where('status_id',3);
+        $software_ditolak = Software::all()->where('status_id',4);
+
+        return view('/admin/pengajuan-list',[
+            'softwares' => $softwares,
+            'status_software'=> $decrypted_status_software,
+            'software_blm_disetujui'=>$software_blm_disetujui,
+            'software_disetujui'=>$software_disetujui,
+            'software_dipertimbangkan'=>$software_dipertimbangkan,
+            'software_ditolak'=>$software_ditolak
+        ]);
+    }
+
+    public function DetailPengajuan($software_id)
+    {
+        $software = Software::find($software_id);
+
+        return view('/admin/pengajuan-detail',[
+            'software'=>$software
+        ]);
+    }
+
+    public function ProsesPengajuan(Request $data, $software_id)
+    {
+        $software = Software::find($software_id);
+        $software->status_id = $data->status_software;
         $software->alasan_ditolak = $data->alasan_ditolak;
         $software->save();
 
-        return redirect('/admin');
+        return redirect('/admin/listpengajuan/'.$data->status_software);
     }
 
     public function ProgresPengajuan($id, $progres_id)
@@ -77,7 +91,7 @@ class AdminController extends Controller
         return redirect('/admin');
     }
 
-    public function formInputSoftware()
+    public function showFormInputSoftware()
     {
         $user=Auth::user();
 
@@ -156,24 +170,21 @@ class AdminController extends Controller
         ]);
     }
 
-    public function MasukKePengembangan($id)
+    public function MasukanKePengembangan($software_id)
     {
-        $user=Auth::user();
-
-        $software = Software::find($id)->first();
+        $software = Software::find($software_id);
         $software->pengembanganUmum = 2;
         $software->pengembangs()->attach($id,[
             'pengembang_id'=>0,
             'status'=>0
         ]);
         $software->save();
-        
-        // $pengembang_id = 0;
-
-        // $software->users()->attach($user->id,['pengembang_id'=> $pengembang_id]);
-
-        // // dd($software->users());
         return redirect('/admin');
+    }
+
+    public function tampilkanNavPengembangan()
+    {
+        return view('/admin/pengembangan');
     }
 
     public function tampilkanPengembanganUmum()

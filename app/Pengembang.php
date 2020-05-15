@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pengembang extends Model
 {
     protected $fillable = [
-        'user_id','nama','alamat','no_hp'
+        'user_id','nama','alamat','no_hp','nik','portfolio','deskripsi'
     ];
 
     public function user()
@@ -17,6 +17,7 @@ class Pengembang extends Model
 
     public function softwares()
     {
-        return $this->belongsToMany('App\Software','pengembang_software','pengembang_id','software_id')->withPivot('id','software_id','pengembang_id','status');
+        return $this->belongsToMany('App\Software','pengembang_software','pengembang_id','software_id')
+                    ->withPivot('id','software_id','pengembang_id','status');
     }
 }

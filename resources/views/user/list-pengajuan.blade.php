@@ -59,8 +59,13 @@
                     <h5 class="card-header text-center">{{$soft->nama_perangkat_lunak}}</h5>
                     <div class="card-body col-md offset-2">
                         <div class="input-group">
+                            @if ($soft->progres_id==0)
                             <p>Status : </p>
                             <h5>{{$soft->status->status}}</h5>
+                            @else
+                            <p>Progres : </p>
+                            <h5 class="text text-success">Berhasil dibuat</h5>
+                            @endif
                         </div>
                         <div class="input-group">
                             <a href="/user/pengajuan/{{$soft->id}}/detail" class="btn btn-secondary" type="button">Detail</a>|

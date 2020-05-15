@@ -26,15 +26,15 @@
                         <div class="row my-1">
                             <div class="col-md-8">
                                 <div class="card bg-transparent border-white">
-                                    <a href="#" role="button" class="btn btn-outline-primary">
-                                        <h5 class="card-title text-white">daftar pengembangan aplikasi</h5>
+                                    <a href="{{route('form-create')}}" role="button" class="btn btn-outline-primary">
+                                        <h5 class="card-title text-white">pengajuan aplikasi</h5>
                                     </a>
                                 </div>
                             </div>
                             <div class="col-md-8">
                                 <div class="card bg-transparent border-white">
-                                    <a href="#" role="button" class="btn btn-outline-primary">
-                                        <h5 class="card-title text-white">pengembangan aplikasi diikuti</h5>
+                                    <a href="/user/pengajuan" role="button" class="btn btn-outline-primary">
+                                        <h5 class="card-title text-white">list pengajuan aplikasi</h5>
                                     </a>
                                 </div>
                             </div>

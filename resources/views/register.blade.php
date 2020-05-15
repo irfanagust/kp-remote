@@ -1,119 +1,150 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('partials.master')
+@section('content')
+<div class="hero-section inner-page">
+    <div class="wave">
+        <svg width="100%" height="265px" viewBox="0 0 1920 265" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Apple-TV" transform="translate(0.000000, -402.000000)" fill="#FFFFFF">
+                    <path
+                        d="M0,439.134243 C175.04074,464.89273 327.944386,477.771974 458.710937,477.771974 C654.860765,477.771974 870.645295,442.632362 1205.9828,410.192501 C1429.54114,388.565926 1667.54687,411.092417 1920,477.771974 L1920,667 L1017.15166,667 L0,667 L0,439.134243 Z"
+                        id="Path"></path>
+                </g>
+            </g>
+        </svg>
 
-    <head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SB Admin 2 - Register</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="{{asset('/bootstrap/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="{{asset('/bootstrap/css/sb-admin-2.min.css')}}" rel="stylesheet">
-
-    </head>
-
-    <body class="bg-gradient-primary">
-
-        <div class="container">
-
-            <div class="card o-hidden border-0 shadow-lg my-5">
-                <div class="card-body p-0">
-                    <!-- Nested Row within Card Body -->
-                    <div class="row">
-                        <div class="col-lg-7 offset-lg-3">
-                            <div class="p-5">
-                                <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
-                                </div>
-                                <form class="user" method="POST" action="/register/proses">
-
-                                    @csrf
-
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" name="name" id="exampleInputName" placeholder="Full Name" value="{{old('name')}}">
-                                        @error('name')
-                                            <div class="alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" name="alamat" id="exampleInputAlamat" placeholder="Address" value="{{old('adress')}}">
-                                        @error('alamat')
-                                            <div class="alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="phone" class="form-control form-control-user" name="no_hp" id="exampleInputno_hp" placeholder="Phone Number" value="{{old('no_hp')}}">
-                                        @error('name')
-                                            <div class="alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="email" class="form-control form-control-user" name="email" id="exampleInputEmail" placeholder="Email Address">
-                                        @error('email')
-                                            <div class="alert-danger">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group row">
-                                        <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <input type="password" class="form-control form-control-user" name="password" id="exampleInputPassword" placeholder="Password">
-                                            @error('password')
-                                            <div class="alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <input type="password" class="form-control form-control-user" name="password_confirmation" id="password_confirmation" placeholder="Repeat Password">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="radio" id="male" name="role" value="1">
-                                        <label for="male">Instansi</label><br>
-                                        <input type="radio" id="female" name="role" value="2">
-                                        <label for="female">Pengguna</label>
-                                    </div>
-
-                                    <button type="submit" class="btn btn-primary btn-user btn-block">
-                                        Register
-                                    </button>  
-                                </form>
-
-                                <hr>
-                                <div class="text-center">
-                                    <a class="small" href="forgot-password.html">Forgot Password?</a>
-                                </div>
-                                <div class="text-center">
-                                    <a class="small" href="{{route('login')}}">Already have an account? Login!</a>
-                                </div>
-                            </div>
-                        </div>
+    </div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12">
+                <div class="row justify-content-center">
+                    <div class="col-md-10 text-center hero-text">
+                        <h1 data-aos="fade-up" data-aos-delay="">
+                            Registrasi untuk lebih banyak fitur
+                        </h1>
+                        <p class="mb-5 text-warning" data-aos="fade-up"  data-aos-delay="100">
+                            Jika anda sebuah instansi, silahkan hubungi DINKOMINFO Banyumas untuk mendapatkan akun
+                        </p>
                     </div>
                 </div>
             </div>
-
         </div>
+    </div>
+</div>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="{{asset('/bootstrap/vendor/jquery/jquery.min.js')}}"></script>
-        <script src="{{asset('/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<section class="site-section">
+    <div class="container">
+        <div class="row mb-5 align-items-end">
+            <div class="col-md-6 offset-3" data-aos="fade-up">
+                <h2>Form Registrasi</h2>
+                <p class="mb-0">
+                    Harap isi form dengan data yang benar dan faktual.    
+                </p>
+            </div>
+        </div>
+        
+        <div class="row">
+            
+            <div class="col-md-6 offset-3"  data-aos="fade-up">
+                <form action="{{route('registerProcess')}}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="role" value="{{2}}">
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label for="nama">Nama lengkap</label>
+                            <input value="{{old('nama')}}" type="text" class="form-control" name="nama" id="nama" placeholder="Isikan nama lengkap anda"/>
+                            
+                            <div class="validate text-danger">
+                                @if($errors->has('nama'))
+                                    {{ $errors->first('nama')}}
+                                 @endif
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label for="nik">NIK</label>
+                            <input type="text" value="{{old('nik')}}" class="form-control" name="nik" id="nik" placeholder="Masukkan Nomor Induk Keluarga" />
+                            
+                            <div class="validate text-danger">
+                                @if($errors->has('nik'))
+                                    {{ $errors->first('nik')}}
+                                 @endif
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label for="portfolio">Portfolio</label>
+                            <input type="file" class="form-control" name="portfolio" id="portfolio"/>
+                            
+                            <div class="validate text-danger">
+                                @if($errors->has('portfolio'))
+                                    {{ $errors->first('portfolio')}}
+                                 @endif
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label for="deskripsi">Deskripsi</label>
+                            <textarea class="form-control" name="deskripsi" id="deskripsi" cols="30" rows="10" placeholder="Jelaskan keahlian anda dan siapa anda">{{old('deskripsi')}}</textarea>
+                            
+                            <div class="validate text-danger">
+                                @if($errors->has('deskripsi'))
+                                    {{ $errors->first('deskripsi')}}
+                                 @endif
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label for="alamat">Alamat</label>
+                            <input type="text" value="{{old('alamat')}}" class="form-control" name="alamat" id="alamat" placeholder="Masukkan alamat tempat tinggal anda sekarang" />
+                            
+                            <div class="validate text-danger">
+                                @if($errors->has('alamat'))
+                                    {{ $errors->first('alamat')}}
+                                 @endif
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label for="no_hp">Nomor Telepon/HP</label>
+                            <input type="tel" value="{{old('no_hp')}}" class="form-control" name="no_hp" id="no_hp" placeholder="Masukkan kontak anda yang bisa dihubungi" />
+                            
+                            <div class="validate text-danger">
+                                @if($errors->has('no_hp'))
+                                    {{ $errors->first('no_hp')}}
+                                 @endif
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label for="email">Email</label>
+                            <input type="email" value="{{old('email')}}" class="form-control" name="email" id="email" placeholder="Masukkan email anda yang valid" />
+                            
+                            <div class="validate text-danger">
+                                @if($errors->has('email'))
+                                    {{ $errors->first('email')}}
+                                 @endif
+                            </div>
+                        </div>
 
-        <!-- Core plugin JavaScript-->
-        <script src="{{asset('/bootstrap/vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+                        <div class="col-md-12 form-group">
+                            <label for="password">Kata sandi</label>
+                            <input type="password" value="{{old('password')}}" class="form-control" name="password" id="password" placeholder="Masukkan kata sandi" />
+                            
+                            <div class="validate text-danger">
+                                @if($errors->has('password'))
+                                    {{ $errors->first('password')}}
+                                 @endif
+                            </div>
+                        </div>
 
-        <!-- Custom scripts for all pages-->
-        <script src="{{asset('/bootstrap/js/sb-admin-2.min.js')}}"></script>
-
-    </body>
-
-</html>
+                        <div class="col-md-12 form-group">
+                            <label for="confirmpassword">Konfirmasi kata sandi</label>
+                            <input type="password" class="form-control" name="password_confirmation" id="confirmpassword" placeholder="Masukkan konfirmasi kata sandi" />
+                        </div>
+    
+                        <div class="col-md-6 form-group">
+                            <button type="submit" class="btn btn-primary d-block w-100" >Buat</button>
+                        </div>
+                  </div>
+                </form>
+            </div>
+          
+        </div>
+    </div>
+</section>
+@endsection

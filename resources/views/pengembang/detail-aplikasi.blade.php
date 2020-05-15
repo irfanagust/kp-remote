@@ -93,10 +93,17 @@
 
                         <form action="/pengembang/list-pengembangan/{{$software->id}}/{{$pengembang->id}}/daftar" method="get">
                             @if ($software->pengembangs()->where('pengembang_id',$pengembang->id)->exists())
+                            
                                 <button class="btn btn-primary" disabled type="button" >
                                     Anda sudah terdaftar
                                 </button>
-                                <p class="text text-danger">Menunggu konfirmasi dari pihak terkait</p>
+
+                                @if ($software->pengembangs()->where('pengembang_id',$pengembang->id)->where('status',1)->exists())
+                                    <p class="text text-success">Anda telah disetujui menjadi pengembang</p>    
+                                @else
+                                    <p class="text text-danger">Menunggu konfirmasi dari pihak terkait</p>
+                                @endif
+
                             @else
                                 <button class="btn btn-primary" type="submit" 
                                     onclick="return confirm('Yakin mendaftar menjadi pengembang pada aplikasi ini')">

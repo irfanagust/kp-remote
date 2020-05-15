@@ -1,4 +1,4 @@
-@extends('user.partials.master')
+@extends('pengembang.partials.master')
 @section('content')
 <div class="hero-section inner-page">
     <div class="wave">
@@ -22,6 +22,8 @@
                         <h1 data-aos="fade-up" data-aos-delay="">
                             {{$software->nama_perangkat_lunak}}
                         </h1>
+                        <p class="mb-5" data-aos="fade-up" data-aos-delay="100">Diajukan oleh
+                            &bullet; {{$software->instansi->nama}}</p>
                     </div>
                 </div>
             </div>
@@ -40,8 +42,8 @@
 
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h5 class="card-title text-muted text-truncate">
-                            <a class="btn btn-outline-primary" href="/storage/file/instansi/document/{{$software->fileSOP}}" stream>File SOP</a>
+                        <h5 class="card-title text-truncate text-primary">
+                            <a class="text text-primary" stream href="{{Storage::url('/file/instansi/document/'.$software->fileSOP)}}">File SOP</a>
                         </h5>
                         
                         <h5 class="card-title text-muted text-truncate">
@@ -88,23 +90,10 @@
                             Keterangan Tambahan :
                         </h5>
                         <p>{{$software->deskripsi}}</p>
-
-                        @if ($software->status_id==1)
-                            <a href="/user/pengajuan/{{$software->id}}/ubah" class="btn btn-warning" type="button">Ubah</a>
-                        @elseif($software->status_id==2)
-                            <button type="submit" class="btn btn-warning" 
-                                onclick="return alert('Tidak bisa mengubah, Aplikasi telah DISETUJUI. Informasi lebih lanjut silahkan hubungi DINKOMINFO')">
-                                Ubah
-                            </button>
-                        @elseif ($software->status_id==3)
-                            <a href="/user/pengajuan/{{$software->id}}/ubah" class="btn btn-warning" type="button">Ubah</a>
-                        @else
-                            <button type="submit" class="btn btn-warning" 
-                                onclick="return alert('Tidak bisa mengubah, Aplikasi telah DITOLAK. Informasi lebih lanjut silahkan hubungi DINKOMINFO')">
-                                Ubah
-                            </button>
-                        @endif
                         
+                        <a class="btn btn-secondary" type="button" href="/pengembang/pengembangan-saya">
+                            Kembali
+                        </a>
                     </div>
                 </div>
 

@@ -67,10 +67,26 @@ class PengembangController extends Controller
         ]);
     }
 
-    public function tampilkanPengembanganDiikuti($id)
+    public function tampilkanPengembanganDiikuti()
     {
-        $software =  $software = Software::all()->where('pengembanganUmum',2)->where('progres_id',1)->where('status_id',2);
-        $software->pengembangs->find($id);
+        $idPengembang = Auth::user()->id;
+        $pengembang = Pengembang::find($idPengembang);
+        $softwareYangDikembangkan = $pengembang->softwares()->where('status',1)->get();
+        
+        return view('/pengembang/pengembangan-disetujui',[
+            'softwareYangDikembangkan' => $softwareYangDikembangkan
+        ]);
+        
+    }
+
+    public function DetailPengembanganDiikuti($software_id)
+    {
+        $software = Software::find($software_id);
+        $user_id = Auth::user()->id;
+
+        return view('pengembang/detail-pengembangan',[
+            'software'=>$software,
+        ]);
     }
 
 }

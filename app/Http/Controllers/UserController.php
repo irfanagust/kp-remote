@@ -59,15 +59,16 @@ class UserController extends Controller
         $user = Auth::user();
         $instansi = Instansi::get()->where('user_id',$user->id)->first();
 
-        // //VALIDASI UNTUK STANDARAISASI ATURAN INPUT PENGAJUAN APLIKASI
+        //VALIDASI UNTUK STANDARAISASI ATURAN INPUT PENGAJUAN APLIKASI
         $pesan = [
             'required' => 'tidak boleh dikosongkan!',
             'min' => 'Field ini minimal :min karakter!',
-            'max' => 'Field ini maksimal :max karakter!'
+            'max' => 'Field ini maksimal :max karakter!',
+            'mimes'=> 'File harus PDF/Word'
         ];
         $this->validate($data , [
             'nama_perangkat_lunak' => 'required|min:6|max:100',
-            'fileSOP' => 'required',
+            'fileSOP' => 'required|mimes:pdf,docx,doc|max:1999',
             'fungsi' => 'required|min:15|max:100',
             'deskripsi' => 'required|min:100|max:500',
             'jenis_layanan_id' => 'required',
@@ -78,6 +79,14 @@ class UserController extends Controller
             'ruang_lingkup_id' => 'required',
             'jenis_database' => 'required|min:4|max:100'
         ] , $pesan);
+
+        if ($data->hasFile('fileSOP')) {
+            $filenameWithExt = $data->file('fileSOP')->getClientOriginalName();
+            $FileName = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            $extFile = $data->file('fileSOP')->getClientOriginalExtension();
+            $FileNameToStore = $FileName.'_'.time().'.'.$extFile;
+            $path = $data->file('fileSOP')->storeAs('public/file/instansi/document', $FileNameToStore);
+        }
         
         Software::create([
             'instansi_id'=>$instansi->id,
@@ -86,7 +95,7 @@ class UserController extends Controller
             'pengembanganUmum'=>0,
             'pengembang_id'=>0,
             'nama_perangkat_lunak' => $data->nama_perangkat_lunak,
-            'fileSOP' => $data->fileSOP,
+            'fileSOP' => $FileNameToStore,
             'fungsi' => $data->fungsi,
             'deskripsi' => $data->deskripsi,
             'jenis_layanan_id' => $data->jenis_layanan_id,

@@ -22,8 +22,8 @@
                         <h1 data-aos="fade-up" data-aos-delay="">
                             Pengajuan software
                         </h1>
-                        <p class="mb-5" data-aos="fade-up"  data-aos-delay="100">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                        <p class="mb-5 text-warning" data-aos="fade-up"  data-aos-delay="100">
+                            Sebelum mengajukan, harap periksa repositori software, barangkali software dengan fungsi yang anda inginkan telah tersedia.
                         </p>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
         <div class="row">
             
             <div class="col-md-6 offset-3"  data-aos="fade-up">
-                <form action="{{route('create')}}" method="post">
+                <form action="{{route('create')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-md-12 form-group">
