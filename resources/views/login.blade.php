@@ -48,7 +48,7 @@
                                     {{ __('E-Mail') }}
                                 </label>
                                 <div class="col-md-6">
-                                    <input id="email" type="email"
+                                    <input id="email" type="text"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
                                     value="{{ old('email') }}" required autocomplete="email" autofocus>
 
@@ -101,6 +101,17 @@
                             </div>
 
                         </form>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="form-group row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <p>
+                                    Belum punya akun ? 
+                                    <a href="{{route('register')}}">{{ __('Daftar') }}</a>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

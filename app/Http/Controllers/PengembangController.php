@@ -20,17 +20,35 @@ class PengembangController extends Controller
 {
     public function __construct()
     {
-        return $this->middleware(['auth']);
+        return $this->middleware(['auth','isPengembang']);
     }
 
     public function index()
     {
         $user_id = Auth::user()->id;
         $pengembang = Pengembang::where('user_id',$user_id)->first();
-        
+        $softwareSelesai = $pengembang->softwares()->where('progres_id',1)->get();
+        $softwareBelumSelesai = $pengembang->softwares()->where('progres_id','!=',1)->get();
         return view('pengembang/home',[
-            'pengembang'=>$pengembang
+            'pengembang'=>$pengembang,
+            'softwareSelesai'=>$softwareSelesai,
+            'softwareBelumSelesai' => $softwareBelumSelesai
         ]);
+    }
+
+    public function tampilkanProfil()
+    {
+        return view('pengembang/profil');
+    }
+
+    public function tampilkanFormProfil()
+    {
+        return view('pengembang/profil-form');
+    }
+
+    public function ubahProfil(Request $data)
+    {
+        
     }
 
     public function daftarPengembang($software_id, $user_id)
@@ -47,9 +65,8 @@ class PengembangController extends Controller
 
     public function tampilkanPengembangan()
     {
-        $software = Software::all()->where('pengembanganUmum',1)->where('progres_id',0)->where('status_id',2);
+        $software = Software::all()->where('pengembanganUmum',1)->where('progres_id',0)->where('status_id',2)->where('pengembang_id',0);
 
-        //BARU
         return view('/pengembang/list-aplikasi',[
             'software' => $software,
         ]);
@@ -69,14 +86,14 @@ class PengembangController extends Controller
 
     public function tampilkanPengembanganDiikuti()
     {
-        $idPengembang = Auth::user()->id;
-        $pengembang = Pengembang::find($idPengembang);
+        $pengembang_id = Auth::user()->id;
+    
+        $pengembang = Pengembang::where('user_id',$pengembang_id)->first();
+    
         $softwareYangDikembangkan = $pengembang->softwares()->where('status',1)->get();
-        
         return view('/pengembang/pengembangan-disetujui',[
             'softwareYangDikembangkan' => $softwareYangDikembangkan
         ]);
-        
     }
 
     public function DetailPengembanganDiikuti($software_id)
@@ -87,6 +104,15 @@ class PengembangController extends Controller
         return view('pengembang/detail-pengembangan',[
             'software'=>$software,
         ]);
+    }
+
+    public function updateProgress($software_id)
+    {
+        $software = Software::find($software_id);
+        
+        $software->progres_id = 2;
+        $software->save();
+        return redirect('/pengembang/pengembangan-saya');
     }
 
 }

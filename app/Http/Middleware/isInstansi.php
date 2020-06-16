@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 
 class isInstansi
 {
@@ -15,9 +16,17 @@ class isInstansi
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user() && $request->user()->role_id != 1){
-            return new Response(view('unauthorized')->with('role', 'Instansi'));
+        if ( Auth::check() && Auth::user()->role_id == 1 )
+        {
+            return $next($request);
         }
-        return $next($request);
+        if ( Auth::check() && Auth::user()->role_id == 2 )
+        {
+            return redirect()->route('pengembang');
+        }
+        if ( Auth::check() && Auth::user()->role_id == 3 )
+        {
+            return redirect()->route('admin');
+        }
     }
 }

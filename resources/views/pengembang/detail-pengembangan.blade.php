@@ -43,7 +43,7 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <h5 class="card-title text-truncate text-primary">
-                            <a class="text text-primary" stream href="{{Storage::url('/file/instansi/document/'.$software->fileSOP)}}">File SOP</a>
+                            <a class="text text-primary" stream href="{{Storage::url('/app/file/instansi/document/'.$software->fileSOP)}}">File SOP</a>
                         </h5>
                         
                         <h5 class="card-title text-muted text-truncate">
@@ -94,6 +94,21 @@
                         <a class="btn btn-secondary" type="button" href="/pengembang/pengembangan-saya">
                             Kembali
                         </a>
+                        @if ($software->progres_id == 0)
+                                <a href="/pengembang/pengembangan-saya/{{$software->id}}/progress" class="btn btn-success ml-1" type="button"
+                                    onclick="return confirm('Software telah sepenuhnya selesai ?')"
+                                    >
+                                    Selesai
+                                </a>
+                            @elseif ($software->progres_id == 1)
+                                <a class="btn btn-success ml-1" type="button" disable>
+                                    Software telah selesai
+                                </a>
+                            @else
+                                <a class="btn btn-info ml-1" type="button" disable>
+                                    Menunggu konfirmasi
+                                </a>
+                            @endif
                     </div>
                 </div>
 

@@ -30,7 +30,7 @@
   
     <!-- Nav Item - Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="/admin/listpengajuan/{{2}}">
+        <a class="nav-link" href="/admin/listpengajuan/{{1}}">
             <i class="fas fa-fw fa-cog"></i>
             <span>Pengajuan</span>
         </a>
@@ -46,7 +46,7 @@
   
     <!-- Nav Item - Pages Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="{{route('pengembangan-umum')}}" >
+        <a class="nav-link" href="/admin/pengembangan/umum/status-dikembangkan/{{0}}" >
             <i class="fas fa-fw fa-folder"></i>
             <span>Pengembangan Umum</span>
         </a>
@@ -77,7 +77,7 @@
   
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="{{route('show-instansi')}}">
             <i class="fas fa-fw fa-table"></i>
             <span>Instansi</span>
         </a>
@@ -93,7 +93,7 @@
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link" href="charts.html">
+        <a class="nav-link" href="{{route('repositori')}}">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Repositori</span>
         </a>

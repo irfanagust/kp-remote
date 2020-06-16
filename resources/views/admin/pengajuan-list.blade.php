@@ -79,7 +79,18 @@
             <div class="container-fluid">
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">
+                            List Pengajuan Software 
+                            @if ($status_software == 1)
+                                belum disetujui
+                            @elseif ($status_software == 2)
+                                telah disetujui
+                            @elseif ($status_software == 3)
+                                dipertimbangkan
+                            @else
+                                ditolak                                
+                            @endif
+                        </h6>
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -99,10 +110,10 @@
                                         <td>{{$software->instansi->nama}}</td>
                                         <td>{{$software->jenis_layanan->jenis_layanan}}</td>
                                         <td class="text text-center">
+                                            <a href="/admin/listpengajuan/{{$software->id}}/detail" class="btn btn-secondary btn-sm">
+                                                Detail
+                                            </a>
                                             @if ($status_software == 1)
-                                                <a href="/admin/listpengajuan/{{$software->id}}/detail" class="btn btn-secondary btn-sm">
-                                                    Detail
-                                                </a>
                                                 <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalSetujuiSoftware{{$software->id}}">
                                                     Setujui
                                                 </button>
@@ -113,32 +124,23 @@
                                                     Tolak
                                                 </button>
                                             @elseif($status_software == 2)
-                                            <a href="/admin/listpengajuan/{{$software->id}}/detail" class="btn btn-secondary btn-sm">
-                                                Detail
-                                            </a>
-                                            <a href="#" class="btn btn-outline-primary btn-sm">
+                                            <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" data-target="#modalPengembanganDinkominfo{{$software->id}}">
                                                 Pengembangan Dinkominfo
-                                            </a>
-                                            <a href="#" class="btn btn-outline-success btn-sm">
+                                            </button>
+                                            <button type="button" class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#modalPengembanganUmum{{$software->id}}">
                                                 Pengembangan Umum
-                                            </a>
+                                            </button>
                                             @elseif($status_software == 3)
-                                            <a href="/admin/listpengajuan/{{$software->id}}/detail" class="btn btn-secondary btn-sm">
-                                                Detail
-                                            </a>
-                                            <a href="#" class="btn btn-primary btn-sm">
+                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalSetujuiSoftware{{$software->id}}">
                                                 Setujui
-                                            </a>
-                                            <a href="#" class="btn btn-danger btn-sm">
+                                            </button>
+                                            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalTolakSoftware{{$software->id}}">
                                                 Tolak
-                                            </a>
+                                            </button>
                                             @else
-                                            <a href="/admin/listpengajuan/{{$software->id}}/detail" class="btn btn-secondary btn-sm">
-                                                Detail
-                                            </a>
-                                            <a href="#" class="btn btn-danger btn-sm">
+                                            <button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#modalHapus{{$software->id}}">
                                                 Hapus
-                                            </a>
+                                            </button>
                                             @endif
                                         </td>
                                     </tr>
@@ -166,7 +168,7 @@
     <!-- End of Main Content -->
 
     @foreach ($softwares as $software)
-        <!-- Modal -->
+        <!-- Modal Setuju-->
         <div class="modal fade" id="modalSetujuiSoftware{{$software->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -191,6 +193,7 @@
             </div>
         </div>
 
+        <!-- Modal Pertimbangkan-->
         <div class="modal fade" id="modalPertimbangkanSoftware{{$software->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -215,6 +218,7 @@
             </div>
         </div>
 
+        <!-- Modal Tolak-->
         <div class="modal fade" id="modalTolakSoftware{{$software->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -244,5 +248,73 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal Hapus-->
+        <div class="modal fade" id="modalHapus{{$software->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"> Yakin menghapus {{$software->nama_perangkat_lunak}} ?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!--FORM--><form method="get" action="/admin/listpengajuan/{{$software->id}}/delete">
+                            @csrf                           
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Proses</button>
+                        </form><!--ENDFORM-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Pengembanga Dinkominfo-->
+        <div class="modal fade" id="modalPengembanganDinkominfo{{$software->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"> Yakin mengirim {{$software->nama_perangkat_lunak}} ke pengembangan DINKOMINFO ?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!--FORM--><form method="get" action="/admin/listpengajuan/{{$software->id}}/pengembangan/{{2}}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Yakin</button>
+                        </form><!--ENDFORM-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Pengembanga Umum-->
+        <div class="modal fade" id="modalPengembanganUmum{{$software->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle"> Yakin mengirim {{$software->nama_perangkat_lunak}} ke pengembangan umum ?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!--FORM--><form method="get" action="/admin/listpengajuan/{{$software->id}}/pengembangan/{{1}}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Yakin</button>
+                        </form><!--ENDFORM-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
     @endforeach
 @endsection

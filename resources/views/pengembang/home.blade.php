@@ -26,14 +26,14 @@
                         <div class="row my-1">
                             <div class="col-md-8">
                                 <div class="card bg-transparent border-white">
-                                    <a href="#" role="button" class="btn btn-outline-primary">
+                                    <a href="/pengembang/list-pengembangan" role="button" class="btn btn-outline-primary">
                                         <h5 class="card-title text-white">daftar pengembangan aplikasi</h5>
                                     </a>
                                 </div>
                             </div>
                             <div class="col-md-8">
                                 <div class="card bg-transparent border-white">
-                                    <a href="#" role="button" class="btn btn-outline-primary">
+                                    <a href="/pengembang/pengembangan-saya" role="button" class="btn btn-outline-primary">
                                         <h5 class="card-title text-white">pengembangan aplikasi diikuti</h5>
                                     </a>
                                 </div>
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <div class="col-lg-5 iphone-wrap mt-5">
-                        <img src="{{asset('bootstrap/portal/img/phone_2.png')}}" alt="Image" class="phone-1"
+                        <img src="{{asset('bootstrap/portal/img/smartcity.png')}}" alt="Image" class="phone-1"
                             data-aos="fade-right">
                     </div>
                 </div>
@@ -68,11 +68,11 @@
             </div>
             <div class="col-md-4 text-center border-left border-right">
                 <h3>Selesai</h3>
-                <p>0</p>
+                <p>{{count($softwareSelesai)}}</p>
             </div>
             <div class="col-md-4 text-center">
                 <h3>Belum selesai</h3>
-                <p>1</p>
+                <p>{{count($softwareBelumSelesai)}}</p>
             </div>
         </div>
 

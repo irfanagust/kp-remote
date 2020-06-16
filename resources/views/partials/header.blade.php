@@ -14,10 +14,10 @@
                 <nav class="site-navigation position-relative text-right" role="navigation">
 
                     <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
-                        <li class="nav-item"><a href="#" class="nav-link">Beranda</a></li>
+                        <li class="nav-item"><a href="/" class="nav-link">Beranda</a></li>
                         <li class="nav-item"><a href="#" class=" nav-link">Berita</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Aplikasi</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Bantuan</a></li>
+                        <li class="nav-item"><a href="/repositori" class="nav-link">Repositori</a></li>
+                        <li class="nav-item"><a href="/bantuan" class="nav-link">Bantuan</a></li>
                         <!-- Authentication Links -->
 
                         @auth

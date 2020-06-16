@@ -41,7 +41,7 @@
                         </div>
                     </div>
                     <div class="col-lg-5 iphone-wrap mt-5">
-                        <img src="{{asset('bootstrap/portal/img/phone_2.png')}}" alt="Image" class="phone-1"
+                        <img src="{{asset('bootstrap/portal/img/smartcity.png')}}" alt="Image" class="phone-1"
                             data-aos="fade-right">
                     </div>
                 </div>

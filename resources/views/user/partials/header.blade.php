@@ -17,7 +17,7 @@
                         <li class="nav-item"><a href="{{route('instansi')}}" class="nav-link">Beranda</a></li>
                         <li class="nav-item"><a href="#" class=" nav-link">Berita</a></li>
                         <li class="nav-item"><a href="/user/pengajuan" class="nav-link">Pengajuan</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Repositori Software</a></li>
+                        <li class="nav-item"><a href="{{route('userShowRepositori')}}" class="nav-link">Repositori Software</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Pelatihan</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Bantuan</a></li>
 

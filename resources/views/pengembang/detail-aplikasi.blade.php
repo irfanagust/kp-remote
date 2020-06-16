@@ -43,7 +43,7 @@
                 <div class="card mb-3">
                     <div class="card-body">
                         <h5 class="card-title text-muted text-truncate">
-                            File SOP
+                            <a class="text text-primary" stream href="{{Storage::url('file/instansi/document/'.$software->fileSOP)}}">File SOP</a>
                         </h5>
                         
                         <h5 class="card-title text-muted text-truncate">

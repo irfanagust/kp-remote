@@ -1,4 +1,4 @@
-@extends('pengembang.partials.master')
+@extends('partials.master')
 @section('content')
 <div class="hero-section inner-page">
     <div class="wave">
@@ -20,7 +20,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-10 text-center hero-text">
                         <h1 data-aos="fade-up" data-aos-delay="">
-                            Pengembangan yang harus anda kerjakan
+                            Repositori Software dari Dinas Komunikasi dan Informatika, Banyumas
                         </h1>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
     <div class="container">
         <div class="row">
 
-            @forelse ($softwareYangDikembangkan as $software)
+            @forelse ($softwares as $software)
             {{-- CARD --}}
             <div class="col-md-4">
                 <!-- Search Widget -->
@@ -41,28 +41,19 @@
                     <h5 class="card-header text-center">{{$software->nama_perangkat_lunak}}</h5>
                     <div class="card-body">
                         <div class="input-group">
-                            <p>Pengaju:</p><h4>{{$software->instansi->nama}}</h4>
+                            <p>Pengaju:</p><h4>
+                                @if ($software->instansi_id == 0)
+                                    DINKOMINFO
+                                @else
+                                    {{$software->instansi->nama}}
+                                @endif
+                            </h4>
                         </div>
                         <div class="input-group">
                             <a stream href="{{Storage::url('/file/instansi/document/'.$software->fileSOP)}}"><h4 class="text text-primary">File SOP</h4></a>
                         </div>
                         <div class="input-group">
-                            <a href="/pengembang/pengembangan-saya/{{$software->id}}/detail-pengembangan" class="btn btn-secondary" type="button">Detail</a>
-                            @if ($software->progres_id == 0)
-                                <a href="/pengembang/pengembangan-saya/{{$software->id}}/progress" class="btn btn-success ml-2" type="button"
-                                    onclick="return confirm('Software telah sepenuhnya selesai ?')"
-                                    >
-                                    Selesai
-                                </a>
-                            @elseif ($software->progres_id == 1)
-                                <a class="btn btn-success mt-1" type="button" disable>
-                                    Software telah selesai
-                                </a>
-                            @else
-                                <a class="btn btn-info mt-1" type="button" disable>
-                                    Menunggu konfirmasi
-                                </a>
-                            @endif
+                            <a href="/repositori/{{$software->id}}/detail" class="btn btn-secondary" type="button">Detail</a>
                         </div>
                     </div>
                 </div>

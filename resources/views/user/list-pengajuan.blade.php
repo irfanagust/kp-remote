@@ -51,7 +51,7 @@
 
         <div class="row">
 
-            @foreach ($software as $soft)
+            @forelse ($software as $soft)
             {{-- CARD --}}
             <div class="col-md-4">
                 <!-- Search Widget -->
@@ -90,7 +90,14 @@
                     </div>
                 </div>
             </div>
-            @endforeach
+            @empty
+            <div class="col-md-12">
+                <!-- Search Widget -->
+                <div class="card mb-3">
+                    <h5 class="card-header text-center">Belum ada software yang anda ajukan</h5>    
+                </div>
+            </div>
+            @endforelse
 
         </div>
 

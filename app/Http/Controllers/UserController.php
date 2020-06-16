@@ -19,13 +19,12 @@ class UserController extends Controller
 
     public function __construct()
     {
-        $this->middleware(['auth']);
+        $this->middleware(['auth','isInstansi']);
     }
 
     public function index()
     {
-        $user = Auth::user();
-        $instansi = Instansi::get()->where('user_id',$user->id)->first();
+        $instansi = Instansi::get()->where('user_id',Auth::user()->id)->first();
 
         return view('user/home',[
             'instansi' => $instansi
@@ -88,7 +87,7 @@ class UserController extends Controller
             $path = $data->file('fileSOP')->storeAs('public/file/instansi/document', $FileNameToStore);
         }
         
-        Software::create([
+        $software = Software::create([
             'instansi_id'=>$instansi->id,
             'status_id'=>1,
             'progres_id'=>0,
@@ -106,7 +105,7 @@ class UserController extends Controller
             'ruang_lingkup_id' => $data->ruang_lingkup_id,
             'jenis_database' => $data->jenis_database
         ]);
-
+        $software->save();
         return redirect('/user/pengajuan');
 
     }
@@ -194,5 +193,12 @@ class UserController extends Controller
         ]);
     }
 
+    public function tampilkanRepositori()
+    {
+        $softwares = Software::all()->where('progres_id',1);
+        return view('/user/software-repositori',[
+            'softwares' => $softwares,
+        ]);
+    }
 
 }

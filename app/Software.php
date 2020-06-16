@@ -3,11 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Software extends Model
 {
-    protected $table="software";
+    use SoftDeletes;
 
+    protected $table="software";
+    protected $dates = ['deleted_at'];
     // GUARDED, jangan pake fillable kalo atribut yg kudu diisinya banyak
     protected $fillable=[
         'status_id',

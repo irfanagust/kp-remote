@@ -1,37 +1,57 @@
-<!-- Begin Page Content -->
-<div class="container-fluid">
-
-    <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
-    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://irfanagust.github.io/">Irfan Agus Tiawan</a>.</p>
-
-    <!-- DataTales Example -->
-    <div class="card shadow mb-4">
-        <div class="card-body">
-            <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                <thead class="text-center">
-                    <tr>
-                        <th>Nama Perangkat Lunak</th>
-                        <th>Intansi Pengaju Software</th>
-                        <th>Pendaftar menjadi pengembang</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($software as $sp)
-                    <tr>
-                        <td>{{$sp->nama_perangkat_lunak}}</td>
-                        <td>{{$sp->instansi->nama}}</td>
-                        <td><a href="/admin/pengembangan-umum/{{$sp->id}}/detail" class="btn btn-primary btn-lg active">Detail</a></td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+@extends('admin.partials.master')
+@section('content')
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+        
+        <div class="row">    
+            @forelse ($softwares as $software)
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">{{$software->nama_perangkat_lunak}}</div>
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">pengaju : {{$software->instansi->nama}}</div>
+                                <div class="h5 mb-0 font-weight-bold text-white-800">
+                                    <a href="/admin/pengembangan/dinkominfo/{{$software->id}}/detail" class="btn btn-primary btn-sm active">Detail</a>
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-white-800">
+                                @if ($software->progres_id != 1)
+                                    <a href="/admin/pengembangan/dinkominfo/{{$software->id}}/update" class="btn btn-info btn-sm active mt-1"
+                                        onclick="confirm('Yakin software ini telah selesai sepenuhnya ? ?')">
+                                        Software telah selesai
+                                    </a>
+                                @else
+                                    Software telah selesai
+                                @endif
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            @empty
+            <div class="col-xl-12 col-md-12 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Data Kosong</div>
+                                <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">Data Kosong</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforelse
         </div>
-        </div>
+        <!-- /.container-fluid -->
     </div>
-    <!-- /.container-fluid -->
-
-</div>
-<!-- End of Main Content -->
+    <!-- End of Main Content -->
+@endsection

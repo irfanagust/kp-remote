@@ -17,8 +17,8 @@
                         <li class="nav-item"><a href="{{route('pengembang')}}" class="nav-link">Beranda</a></li>
                         <li class="nav-item"><a href="#" class=" nav-link">Berita</a></li>
                         <li class="nav-item"><a href="/pengembang/list-pengembangan" class="nav-link">Aplikasi</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Aplikasi Diikuti</a></li>
-                        <li class="nav-item"><a href="#" class="nav-link">Pelatihan</a></li>
+                        <li class="nav-item"><a href="/pengembang/pengembangan-saya" class="nav-link">Aplikasi Diikuti</a></li>
+                        <li class="nav-item"><a href="" class="nav-link">Pelatihan</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Bantuan</a></li>
 
                         <li class="has-children">
@@ -29,7 +29,7 @@
                                 </li>
                                 @if (Route::has('register'))
                                 <li class="dropdown-item">
-                                    <a class="nav-link" href="#">{{ __('Profil') }}</a>
+                                    <a class="nav-link" href="{{route('kelola-profil-pengembang')}}">{{ __('Profil') }}</a>
                                 </li>
                                 @endif
                             </ul>

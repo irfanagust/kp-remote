@@ -23,7 +23,7 @@ class LoginController extends Controller
         ];
 
         $this->validate($request,[
-            'email'=>'email|required',
+            'email'=>'required',
             'password'=>'required|min:5'
         ], $message);
 
@@ -32,13 +32,12 @@ class LoginController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            
-            if ($data->role_id==1) {
-                return redirect()->intended('/user');
-            } elseif ($data->role_id==2) {
-                return redirect()->intended('/pengembang');
-            } elseif ($data->role_id==3) {
-                return redirect()->intended('/admin');
+            if (Auth::user()->role_id==1) {
+                return redirect('/user');
+            }if (Auth::user()->role_id==2) {
+                return redirect('/pengembang');
+            }if (Auth::user()->role_id==3) {
+                return redirect('/admin');
             } else {
                 return redirect()->back();
             }

@@ -20,10 +20,10 @@
                 <div class="row justify-content-center">
                     <div class="col-md-10 text-center hero-text">
                         <h1 data-aos="fade-up" data-aos-delay="">
-                            Anda bisa bergabung menjadi salah satu pengembang Aplikasi
+                            Profil
                         </h1>
-                        <p class="mb-5" data-aos="fade-up" data-aos-delay="100">
-                            &bullet; Dinas Komunikasi dan Informatika, Banyumas &bullet;
+                        <p class="mb-5 text-warning" data-aos="fade-up"  data-aos-delay="100">
+                            {{Auth::user()->pengembang->nama}}
                         </p>
                     </div>
                 </div>
@@ -35,34 +35,34 @@
 <section class="site-section">
     <div class="container">
         <div class="row">
-
-            @forelse ($software as $s)
-            {{-- CARD --}}
-            <div class="col-md-4">
-                <!-- Search Widget -->
-                <div class="card mb-3">
-                    <h5 class="card-header text-center">{{$s->nama_perangkat_lunak}}</h5>
-                    <div class="card-body">
-                        <div class="input-group">
-                            <p>Pengaju:</p><h4>{{$s->instansi->nama}}</h4>
-                        </div>
-                        <div class="input-group">
-                            <a href="/pengembang/list-pengembangan/{{$s->id}}/detail" class="btn btn-secondary" type="button">Detail</a>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-md-2 offset-9">
+                <a href="{{route('form-kelola-pengembang')}}" class="btn btn-secondary btn-sm">Ubah Profil</a>
             </div>
-            @empty
-            <div class="col-md-12">
-                <div class="card mb-3">
-                    <h3 class="card-header text-center">Data Kosong</h3>
-                </div>
-            </div>
-            @endforelse
-
         </div>
+        <div class="row mb-5 align-items-end">
+            <div class="col-md-6 offset-5" data-aos="fade-up">
+                <img src="{{asset('file/default-profil.png')}}" class="w-25 h-25">
+            </div>
+        </div>
+        
+        <div class="row">
+            
+            <div class="col-md-6 offset-3"  data-aos="fade-up">
+                <h4>Alamat</h4>
+                <p>{{Auth::user()->pengembang->alamat}}</p>
+            </div>
 
+            <div class="col-md-6 offset-3"  data-aos="fade-up">
+                <h4>Kontak</h4>
+                <p>{{Auth::user()->pengembang->no_hp}}</p>
+            </div>
+
+            <div class="col-md-6 offset-3"  data-aos="fade-up">
+                <h4>E-mail</h4>
+                <p>{{Auth::user()->email}}</p>
+            </div>
+          
+        </div>
     </div>
-    <br><br><br><br><br><br><br>
 </section>
 @endsection
